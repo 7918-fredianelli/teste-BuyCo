@@ -6,14 +6,12 @@ const link = " http://localhost:3000";
 function App() {
 
   const [user, setUser] = useState([])
-
+  
   const getUser = ()=>{
     axios
       .get(`${link}/users`)
       .then(response=>{
         setUser(response.data)
-        console.log(response.data)
-        console.log(user)
       })
       .catch(err=>{
         console.log(err.message)
@@ -24,9 +22,18 @@ function App() {
     getUser()
   }, [])
 
+const getArray = ()=>{
+  console.log(user)
+}
+
+const mapUser = user.map((usuario)=>{
+return <li>{usuario.firstName}</li>
+})
+
   return (
     <div>
-     <button> Clica aqui</button>
+     <button onClick={getArray}> Clica aqui</button>
+     {mapUser}
     </div>
   );
 }
