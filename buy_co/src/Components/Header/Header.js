@@ -1,9 +1,10 @@
 import React from "react";
+import {Head} from "./stylesHeader"
 
 function Header(){
 
     return(
-        <div>Header</div>
+         <Head>Menu</Head>
     )
 }
 export default Header;

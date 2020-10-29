@@ -4,6 +4,8 @@ import {Switch, Route, BrowserRouter} from "react-router-dom"
 import UsersPage from "../UsersPage/UsersPage";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import CreateUser from "../CreateUser/CreateUser";
+import PageNotFound from "../PageNotFound/PageNotFound";
 function Router(){
     return(
     <SolidPage>
@@ -19,41 +21,16 @@ function Router(){
               <UsersPage/>
               <Footer/>
             </Route>
-            {/* <Route exact path="/home/:tipo">
+             <Route exact path="/signup">
               <Header/>
-              <HomePage/>
-              <Footer/>
-            </Route>
-            <Route exact path="/inscricao">
-              <Header/>
-              <RegistrationPage/>
-              <Footer/>
-            </Route>
-            <Route exact path="/login/:log">
-              <Header/>
-              <LoginPage/>
-              <Footer/>
-            </Route>
-            <Route exact path="/logado/viagens">
-              <Header/>
-              <TravelsPage/>
-              <Footer/>
-            </Route>
-            <Route exact path="/logado/nova-viagem">
-              <Header/>
-              <CreateTravelPage/>
-              <Footer/>
-            </Route>
-            <Route exact path="/logado/pagina-de-aprovacao">
-              <Header/>
-              <ApprovalPage/>
+              <CreateUser/>
               <Footer/>
             </Route>
             <Route path="/">
-              <Header/>
-              <NotFound/>
-              <Footer/>
-            </Route> */}
+            <Header/>
+            <PageNotFound/>
+            <Footer/>
+          </Route>
           </Switch>
         </BrowserRouter>
       </SolidPage>
