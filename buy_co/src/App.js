@@ -1,12 +1,9 @@
 import React from "react";
-import {Switch, Route, BrowserRouter} from "react-router-dom"
-
+import Router from "../src/Components/Router/Router";
 function App() {
 
   return (
-    <div>
-        Olá Mundo!
-    </div>
+    <Router/>
   );
 }
 
