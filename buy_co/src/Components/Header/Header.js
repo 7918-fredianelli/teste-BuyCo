@@ -4,7 +4,7 @@ import {Head} from "./stylesHeader"
 function Header(){
 
     return(
-         <Head>Menu</Head>
+         <Head><h1>Teste BuyCo<span>.</span></h1></Head>
     )
 }
 export default Header;
