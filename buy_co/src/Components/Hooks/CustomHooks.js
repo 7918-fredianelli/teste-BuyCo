@@ -1,11 +1,23 @@
-import React from "react";
+import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 
-const useUrl = get =>{
+export const useUrl = get =>{
     const history = useHistory();
     const route = ()=>{
        history.push(get)
     }
     return [route]
- }
- export default useUrl
+ };
+
+ 
+export const useForm = initialValues => {
+ 
+   const [form, setForm] = useState(initialValues);
+ 
+   const onChange = (name, value) => {
+     const newForm = { ...form, [name]: value };
+     setForm(newForm);
+   };
+ 
+   return { form, onChange };
+ };
