@@ -11,7 +11,7 @@ function Router(){
     <SolidPage>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/home">
+            <Route exact path="/users">
               <Header/>
               <UsersPage/>
               <Footer/>
