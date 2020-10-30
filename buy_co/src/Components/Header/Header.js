@@ -1,11 +1,10 @@
 import React from "react";
 import {Head, Title, TitlePoint, But} from "./stylesHeader"
-import {useParams, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import useUrl from "../Hooks/CustomHooks";
 
 function Header(){
     const location = useLocation();
-    const pathParams = useParams();
     const [goToSignUp] = useUrl("/signup");
     const [goToUsers] = useUrl("/users");
 
@@ -20,7 +19,7 @@ function Header(){
       };
     return(
          <Head>
-            <Title>Teste BuyCo<TitlePoint>.</TitlePoint></Title>
+            <Title onClick={goToUsers}>Teste BuyCo<TitlePoint>.</TitlePoint></Title>
             {renderizaBotao()}
          </Head>
     )

@@ -7,7 +7,7 @@ export const Head = styled.header`
   justify-content: space-between;
   background-color: white;
   color:   #28325d;
-  border: 1px solid  rgba(40, 50, 93, 0.2);
+  border-bottom: 1px solid  rgba(40, 50, 93, 0.2);
   height: 100%;
   >*{
     margin: 0 25px;

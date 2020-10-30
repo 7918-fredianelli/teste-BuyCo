@@ -1,9 +1,12 @@
 import React from "react";
+import {Foot, Caption} from "./stylesFooter";
 
 function Footer(){
 
     return(
-        <div>Rodapé</div>
+        <Foot>
+            <Caption>Copyright© - Developed by: Vinícius Fredeanelle</Caption>
+        </Foot>
     )
 }
 export default Footer;
