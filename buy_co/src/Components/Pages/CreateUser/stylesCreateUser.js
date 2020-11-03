@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Main = styled.main`
+export const MainPage = styled.main`
     grid-column: 2/3;
     grid-row: 2/3;
     margin: 0;

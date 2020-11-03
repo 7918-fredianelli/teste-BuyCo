@@ -1,11 +1,11 @@
 import React from "react";
 import {SolidPage} from "./stylesRouter";
 import {Switch, Route, BrowserRouter} from "react-router-dom"
-import UsersPage from "../UsersPage/UsersPage";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import CreateUser from "../CreateUser/CreateUser";
-import PageNotFound from "../PageNotFound/PageNotFound";
+import UsersPage from "../../Pages/UsersPage/UsersPage";
+import Header from "../../Header/Header";
+import Footer from "../../Footer/Footer";
+import CreateUser from "../../Pages/CreateUser/CreateUser";
+import PageNotFound from "../../Pages/PageNotFound/PageNotFound";
 function Router(){
     return(
     <SolidPage>

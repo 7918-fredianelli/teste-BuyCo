@@ -1,7 +1,7 @@
 import React from "react";
 import {Head, Title, TitlePoint, But} from "./stylesHeader"
 import {useLocation} from "react-router-dom";
-import {useUrl} from "../Hooks/CustomHooks";
+import {useUrl} from "../Others/Hooks/CustomHooks";
 
 function Header(){
     const location = useLocation();
