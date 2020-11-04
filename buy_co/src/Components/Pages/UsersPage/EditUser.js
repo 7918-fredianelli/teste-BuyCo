@@ -10,20 +10,18 @@ function EditUser(props){
         lastName: props.stateUser.lastName,
         email: props.stateUser.email,
         phone: props.stateUser.phone,
-        // adress: {
-        //     zipCode: props.stateUser && props.stateUser.adress.zipCode,
-        //     city: props.stateUser && props.stateUser.adress.city,
-        //     streetAdress: props.stateUser && props.stateUser.adress.streetAdress,
-        //     country: props.stateUser && props.stateUser.adress.country,
-        //     state: props.stateUser && props.stateUser.adress.state,
-        //     geo: {
-        //         latitude: "",
-        //         longitude: ""
-        //     },
-        // }
+        address: {
+            zipCode: props.stateUser && props.stateUser.address.zipCode,
+            city: props.stateUser && props.stateUser.address.city,
+            streetAddress: props.stateUser && props.stateUser.address.streetAddress,
+            country: props.stateUser && props.stateUser.address.country,
+            state: props.stateUser && props.stateUser.address.state,
+            geo: {
+                latitude: "",
+                longitude: ""
+            },
+        }
     });
-
-    console.log(props.stateUser)
 
     const handleInputChange = event => {
         const { name, value } = event.target;
@@ -40,21 +38,31 @@ function EditUser(props){
             lastName: form.lastName,
             email: form.email,
             phone: form.phone,
-            adress : {
-                zipCode: form.zipCode,
-                city: form.city,
-                streetAdress: form.streetAdress,
-                country: form.country,
-                state: form.state,
+            address : {
+                zipCode: form.address.zipCode,
+                city: form.address.city,
+                streetAddress: form.address.streetAddress,
+                country: form.address.country,
+                state: form.address.state,
                 geo: {
                     latitude: "",
                     longitude: ""
                 }
             }
         }
-        axios
-        .put(`${url}/users/${props.stateUser.id}`, body)
+         if(window.confirm("Deseja alterar esse usuário?")){
+            axios
+            .put(`${url}/users/${props.stateUser.id}`, body)
+            .then(()=>{
+                alert(`Usuário ${form.firstName} alterado com sucesso!`)
+                volta()
+            })
+            .catch((error)=>{
+                console.log(error.message)
+            })
+        }
     }
+
     return(
         <div>
             <form>
@@ -97,22 +105,19 @@ function EditUser(props){
                 <label>Telefone:</label>
                 <input
                     name="phone"
-                    type="number"
                     placeholder="Ex: +55 (31) 99123-456"
                     value={form.phone}
                     onChange={handleInputChange}
                     required
                 />
                 </div>
-                {/* <div>
+                <div>
                 <label>Código postal:</label>
                 <input
                     name="zipCode"
-                    type={"number"}
                     placeholder="33-444-333"
-                    pattern={"[A-Za-z]{3,}"}
                     title="O nome deve ter no mínimo 3 letras"
-                    value={form.adress.zipCode}
+                    value={form.address.zipCode}
                     onChange={handleInputChange}
                     required
                 />
@@ -122,9 +127,8 @@ function EditUser(props){
                 <input
                     name="city"
                     placeholder="Taguatinga"
-                    pattern={"[A-Za-z]{3,}"}
                     title="O nome deve ter no mínimo 3 letras"
-                    value={form.adress.city}
+                    value={form.address.city}
                     onChange={handleInputChange}
                     required
                 />
@@ -132,11 +136,10 @@ function EditUser(props){
                 <div>
                 <label>Rua:</label>
                 <input
-                    name="streetAdress"
+                    name="streetAddress"
                     placeholder="25 de Março"
-                    pattern={"[A-Za-z]{3,}"}
                     title="O nome deve ter no mínimo 3 letras"
-                    value={form.adress.streetAdress}
+                    value={form.address.streetAddress}
                     onChange={handleInputChange}
                     required
                 />
@@ -146,9 +149,8 @@ function EditUser(props){
                 <input
                     name="country"
                     placeholder="Brasil"
-                    pattern={"[A-Za-z]{3,}"}
                     title="O nome deve ter no mínimo 3 letras"
-                    value={form.adress.country}
+                    value={form.address.country}
                     onChange={handleInputChange}
                     required
                 />
@@ -158,14 +160,13 @@ function EditUser(props){
                 <input
                     name="state"
                     placeholder="Minas Gerais"
-                    pattern={"[A-Za-z]{3,}"}
                     title="O nome deve ter no mínimo 3 letras"
-                    value={form.adress.state}
+                    value={form.address.state}
                     onChange={handleInputChange}
                     required
-                /> */}
-                {/* </div> */}
-                 <button onClick={volta}>Editar usuário</button>
+                />
+                </div>
+                 <button onClick={getUserById}>Editar usuário</button>
             </form>
         </div>
     )

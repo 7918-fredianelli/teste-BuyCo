@@ -2,6 +2,7 @@ import React, {useState, useEffect, useReducer}from "react";
 import axios from "axios";
 import {url} from "../../Others/Hooks/CustomHooks";
 import EditUser from "./EditUser";
+import {MainPage, User, ButtonUsers, ButtonPages, DivButtonPages} from "./stylesUsersPage";
 
 const initialState = {
     count: 1
@@ -61,10 +62,8 @@ function UsersPage(){
     }, [])
     
     useEffect(()=>{
-        if(state.count !== ""){
-            getUsers()
-        }
-    }, [state])
+        getUsers()    
+    }, [state, edit])
 
     const orderNameAZ = (a,b)=>{
         return (a.firstName > b.firstName) ? 1 :
@@ -99,15 +98,16 @@ function UsersPage(){
     }
 
     const deleteUser = (name, id)=>{
-        axios
-        .delete(`${url}/users/${id}`)
-        .then(()=>{
-            alert(`Usuário ${name} excluido com sucesso!`)
-        })
-        .catch((error)=>{
-            console.log(error.message)
-        })
-
+        if(window.confirm("Deseja realmente excluir esse usuário?")){
+            axios
+            .delete(`${url}/users/${id}`)
+            .then(()=>{
+                alert(`Usuário ${name} excluido com sucesso!`)
+            })
+            .catch((error)=>{
+                console.log(error.message)
+            })
+        }
         {getUsers()}
     }
 
@@ -115,9 +115,8 @@ function UsersPage(){
         setStateUser(user)
         setEdit(true)
     }
-    console.log(stateUser)
     return (
-        <div>
+        <MainPage>
             {edit === false ?
              <select onChange={onChangeOrder} value={order}> 
                         <option value="">Ordenar por: </option>
@@ -127,21 +126,23 @@ function UsersPage(){
                         <option value="BiggestId">Maior Id</option>
                     </select> : ""}
 
-            {edit === false ? users.map((user)=>{
-                return <div>
-                            <span onClick={()=>editUser(user)}>i</span>
-                            {user.firstName}
-                            <span onClick={()=>deleteUser(user.firstName, user.id)}>X</span>
-                       </div>
-            }) : <EditUser setEdit={setEdit} stateUser={stateUser}/>}
+            
+                {edit === false ? users.map((user)=>{
+                    return <User>
+                                <ButtonUsers onClick={()=>editUser(user)}>Detalhes</ButtonUsers>
+                                {user.firstName} {user.lastName}
+                                <ButtonUsers onClick={()=>deleteUser(user.firstName, user.id)}>Deletar Usuário</ButtonUsers>
+                        </User>
+                }) : <EditUser setEdit={setEdit} stateUser={stateUser}/>}
+                
 
-           {edit === false ? <div>
-                <span>{state.count}</span>
-                <button onClick={nextPage}>+</button>
-                <button onClick={previousPage}>-</button>
-            </div> : ""
+           {edit === false ? <DivButtonPages>
+                <ButtonPages onClick={previousPage}><strong>&larr;</strong></ButtonPages>
+                <ButtonPages>{state.count}</ButtonPages>
+                <ButtonPages onClick={nextPage}><strong>&rarr;</strong></ButtonPages>
+            </DivButtonPages> : ""
             }
-        </div>
+        </MainPage>
     )
 }
 export default UsersPage;

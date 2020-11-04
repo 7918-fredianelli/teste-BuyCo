@@ -2,16 +2,16 @@ import React, {useState} from "react";
 import {useForm, url} from "../../Others/Hooks/CustomHooks";
 import {MainPage} from "./stylesCreateUser";
 import axios from "axios";
-import AdressComponent from "./AdressComponent";
+import AddressComponent from "./AddressComponent";
 
 function CreateUser(){
-    const [adress, setAdress] = useState(false);
+    const [address, setAddress] = useState(false);
 
-    const resgisterAdress = {
-        adress : {
+    const resgisterAddress = {
+        address : {
             zipCode: "",
             city: "",
-            streetAdress: "",
+            streetAddress: "",
             country: "",
             state: "",
             geo: {
@@ -26,7 +26,7 @@ function CreateUser(){
         lastName: "",
         email: "",
         phone: "",
-        resgisterAdress
+        resgisterAddress
     });
     
     const handleInputChange = event => {
@@ -42,10 +42,10 @@ function CreateUser(){
             lastName: form.lastName,
             email: form.email,
             phone: form.phone,
-            adress : {
+            address : {
                 zipCode: form.zipCode,
                 city: form.city,
-                streetAdress: form.streetAdress,
+                streetAddress: form.streetAddress,
                 country: form.country,
                 state: form.state,
                 geo: {
@@ -64,14 +64,14 @@ function CreateUser(){
         })
     }
 
-    const rendersAdress = (event)=>{
+    const rendersAddress = (event)=>{
         event.preventDefault()
-        setAdress(true)
+        setAddress(true)
     }
 
-    const dontRendersAdress = (event)=>{
+    const dontRendersAddress = (event)=>{
         event.preventDefault()
-        setAdress(false)
+        setAddress(false)
     }
 
     return(
@@ -125,10 +125,10 @@ function CreateUser(){
                 </div>
                 <div>
                     <label>Deseja cadastrar o endereço agora?</label>
-                    <button onClick={rendersAdress}>Sim</button>
-                    <button onClick={dontRendersAdress}>Não</button>
+                    <button onClick={rendersAddress}>Sim</button>
+                    <button onClick={dontRendersAddress}>Não</button>
                 </div>
-                {adress === true ? <AdressComponent resgisterAdress= {form.resgisterAdress} handleInputChange={handleInputChange}/> : ""}
+                {address === true ? <AddressComponent resgisterAddress= {form.resgisterAddress} handleInputChange={handleInputChange}/> : ""}
                 <button onClick={create}>Criar Usuário</button>
             </form>
         </MainPage>

@@ -1,8 +1,7 @@
 import React from "react";
 import {form, handleInputChange} from "./CreateUser";
 
-
-function AdressComponent(props){
+function AddressComponent(props){
 
     return(
         <div>
@@ -14,7 +13,7 @@ function AdressComponent(props){
                     placeholder="33-444-333"
                     pattern={"[A-Za-z]{3,}"}
                     title="O nome deve ter no mínimo 3 letras"
-                    value={props.resgisterAdress.zipCode}
+                    value={props.resgisterAddress.zipCode}
                     onChange={props.handleInputChange}
                     required
                 />
@@ -26,7 +25,7 @@ function AdressComponent(props){
                     placeholder="Taguatinga"
                     pattern={"[A-Za-z]{3,}"}
                     title="O nome deve ter no mínimo 3 letras"
-                    value={props.resgisterAdress.city}
+                    value={props.resgisterAddress.city}
                     onChange={props.handleInputChange}
                     required
                 />
@@ -34,11 +33,11 @@ function AdressComponent(props){
                 <div>
                 <label>Rua:</label>
                 <input
-                    name="streetAdress"
+                    name="streetAddress"
                     placeholder="25 de Março"
                     pattern={"[A-Za-z]{3,}"}
                     title="O nome deve ter no mínimo 3 letras"
-                    value={props.resgisterAdress.streetAdress}
+                    value={props.resgisterAddress.streetAddress}
                     onChange={props.handleInputChange}
                     required
                 />
@@ -50,7 +49,7 @@ function AdressComponent(props){
                     placeholder="Brasil"
                     pattern={"[A-Za-z]{3,}"}
                     title="O nome deve ter no mínimo 3 letras"
-                    value={props.resgisterAdress.country}
+                    value={props.resgisterAddress.country}
                     onChange={props.handleInputChange}
                     required
                 />
@@ -62,7 +61,7 @@ function AdressComponent(props){
                     placeholder="Minas Gerais"
                     pattern={"[A-Za-z]{3,}"}
                     title="O nome deve ter no mínimo 3 letras"
-                    value={props.resgisterAdress.state}
+                    value={props.resgisterAddress.state}
                     onChange={props.handleInputChange}
                     required
                 />
@@ -70,4 +69,4 @@ function AdressComponent(props){
         </div>
     )
 }
-export default AdressComponent;
+export default AddressComponent;
