@@ -29,10 +29,10 @@ function UsersPage(){
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const [input, setInput] = useState("")
+    const [order, setOrder] = useState("")
 
-	const onChangeId = (event) => {
-		setInput(event.target.value)
+	const onChangeOrder = (event) => {
+		setOrder(event.target.value)
 	}
 
     const nextPage = () => dispatch({ type: "NEXT" });
@@ -59,46 +59,55 @@ function UsersPage(){
         }
     }, [state])
 
-    const getUsersById = ()=>{
-        axios
-        .get(`${url}/users/${input}`)
-        .then((response)=>{
-            setUsers(response.data)
-        })
-        .catch((error)=>{
-            console.log(error.message)
-        })
+    const orderNameAZ = (a,b)=>{
+        return (a.firstName > b.firstName) ? 1 :
+        ((b.firstName > a.firstName) ? -1 : 0);
+    }
+    const orderNameZA = (a,b)=>{
+        return (b.firstName > a.firstName) ? 1 :
+        ((a.firstName > b.firstName) ? -1 : 0);
     }
 
-    const filtra = users.map((user)=>{
-        if(input !== ""){
-            users.filter((user, id)=>{
-                if(user.id === input){
-                    return <div>{id}</div>
-                }
-            })
-        }
-        return <div>{user.firstName}</div>
-    })
+    const orderLowerId = (a,b)=>{
+        return a.id - b.id
+    }
+    const orderHigherId = (a,b)=>{
+        return b.id - a.id
+    }
 
+    switch(order){
+        case 'OrderAZ':
+            users.sort(orderNameAZ)
+            break;
+        case 'OrderZA':
+            users.sort(orderNameZA)
+            break;
+        case 'LowestId':
+            users.sort(orderLowerId)
+            break;
+        case 'BiggestId':
+            users.sort(orderHigherId)
+            break;
+        default: ;
+    }
 
     return (
         <div>
-           <div>
-               <label>Filtrar por id</label>
-               <input
-                onChange={onChangeId}
-                value={input}
-                type={"number"}
-               />
-               {/* <button onClick={filtra}>Filtrar</button> */}
-           </div>
+             <select onChange={onChangeOrder} value={order}> 
+                        <option value="">Ordenar por: </option>
+                        <option value="OrderAZ">Ordem alfábetica de A-Z</option>
+                        <option value="OrderZA">Ordem alfabética de Z-A</option>
+                        <option value="LowestId">Menor Id</option>
+                        <option value="BiggestId">Maior Id</option>
+                    </select>
             <div>
                 <span>{state.count}</span>
                 <button onClick={nextPage}>+</button>
                 <button onClick={previousPage}>-</button>
             </div>
-                {filtra}
+            {users.map((user)=>{
+                return <div>{user.firstName}</div>
+            })}
         </div>
     )
 }
