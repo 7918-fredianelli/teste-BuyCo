@@ -1,4 +1,3 @@
-# teste-BuyCo
 
 <h1> Teste BuyCo </h1>
 
