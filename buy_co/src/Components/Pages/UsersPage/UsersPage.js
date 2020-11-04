@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useReducer}from "react";
 import axios from "axios";
 import {url} from "../../Others/Hooks/CustomHooks";
+import EditUser from "./EditUser";
 
 const initialState = {
     count: 1
@@ -9,7 +10,7 @@ const initialState = {
 const reducer = (state, action)=>{
     switch (action.type) {
       case "NEXT":
-        if (state.count < 50) {
+        if (state.count < 51) {
             return { count: state.count + 1 };
         }
         return { count: state.count + 0 };
@@ -25,11 +26,13 @@ const reducer = (state, action)=>{
 
 function UsersPage(){
 
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState([]);
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const [order, setOrder] = useState("")
+    const [order, setOrder] = useState("");
+
+    const [edit, setEdit] = useState(false);
 
 	const onChangeOrder = (event) => {
 		setOrder(event.target.value)
@@ -91,23 +94,48 @@ function UsersPage(){
         default: ;
     }
 
+    const deleteUser = (name, id)=>{
+        axios
+        .delete(`${url}/users/${id}`)
+        .then(()=>{
+            alert(`Usuário ${name} excluido com sucesso!`)
+        })
+        .catch((error)=>{
+            console.log(error.message)
+        })
+
+        {getUsers()}
+    }
+
+    const renderFormEdit = (user)=>{
+        setEdit(true)
+    }
+
     return (
         <div>
+            {edit === false ?
              <select onChange={onChangeOrder} value={order}> 
                         <option value="">Ordenar por: </option>
                         <option value="OrderAZ">Ordem alfábetica de A-Z</option>
                         <option value="OrderZA">Ordem alfabética de Z-A</option>
                         <option value="LowestId">Menor Id</option>
                         <option value="BiggestId">Maior Id</option>
-                    </select>
-            <div>
+                    </select> : ""}
+
+            {edit === false ? users.map((user)=>{
+                return <div>
+                            <span onClick={()=>renderFormEdit(user)}>i</span>
+                            {user.firstName}
+                            <span onClick={()=>deleteUser(user.firstName, user.id)}>X</span>
+                       </div>
+            }) : <EditUser setEdit={setEdit}/>}
+
+           {edit === false ? <div>
                 <span>{state.count}</span>
                 <button onClick={nextPage}>+</button>
                 <button onClick={previousPage}>-</button>
-            </div>
-            {users.map((user)=>{
-                return <div>{user.firstName}</div>
-            })}
+            </div> : ""
+            }
         </div>
     )
 }
