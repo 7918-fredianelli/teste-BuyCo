@@ -24,6 +24,8 @@ const reducer = (state, action)=>{
     }
 }
 
+const bananinha = ""
+
 function UsersPage(){
 
     const [users, setUsers] = useState([]);
@@ -33,6 +35,8 @@ function UsersPage(){
     const [order, setOrder] = useState("");
 
     const [edit, setEdit] = useState(false);
+
+    const [stateUser, setStateUser] = useState("")
 
 	const onChangeOrder = (event) => {
 		setOrder(event.target.value)
@@ -107,10 +111,11 @@ function UsersPage(){
         {getUsers()}
     }
 
-    const renderFormEdit = (user)=>{
+    const editUser = (user)=>{
+        setStateUser(user)
         setEdit(true)
     }
-
+    console.log(stateUser)
     return (
         <div>
             {edit === false ?
@@ -124,11 +129,11 @@ function UsersPage(){
 
             {edit === false ? users.map((user)=>{
                 return <div>
-                            <span onClick={()=>renderFormEdit(user)}>i</span>
+                            <span onClick={()=>editUser(user)}>i</span>
                             {user.firstName}
                             <span onClick={()=>deleteUser(user.firstName, user.id)}>X</span>
                        </div>
-            }) : <EditUser setEdit={setEdit}/>}
+            }) : <EditUser setEdit={setEdit} stateUser={stateUser}/>}
 
            {edit === false ? <div>
                 <span>{state.count}</span>
